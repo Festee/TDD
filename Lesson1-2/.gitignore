@@ -1,0 +1,11 @@
+# Maven generated files
+**/target/
+
+# Java compiled files
+*.class
+
+# VS Code
+.vscode/
+
+# IDE files
+.idea/
