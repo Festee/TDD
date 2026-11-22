@@ -15,6 +15,10 @@ public class AccountService {
         destination.deposit(amount);
     }
 
+    public void deposit(String accountId, long amount) {
+        findAccount(accountId).deposit(amount);
+    }
+
     private Account findAccount(String accountId) {
         return accountRepository.findById(accountId).orElseThrow();
     }
