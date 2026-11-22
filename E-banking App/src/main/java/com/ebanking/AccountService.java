@@ -19,6 +19,14 @@ public class AccountService {
         findAccount(accountId).deposit(amount);
     }
 
+    public void withdraw(String accountId, long amount) {
+        Account account = findAccount(accountId);
+        if (amount > account.getBalance()) {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
+        account.withdraw(amount);
+    }
+
     private Account findAccount(String accountId) {
         return accountRepository.findById(accountId).orElseThrow();
     }
