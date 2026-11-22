@@ -26,4 +26,8 @@ public class Account {
     public void deposit(long depositAmount) {
         balance += depositAmount;
     }
+
+    public void withdraw(long withdrawalAmount) {
+        balance -= withdrawalAmount;
+    }
 }
