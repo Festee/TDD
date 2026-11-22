@@ -21,13 +21,17 @@ public class AccountService {
 
     public void withdraw(String accountId, long amount) {
         Account account = findAccount(accountId);
-        if (amount > account.getBalance()) {
-            throw new IllegalArgumentException("Insufficient funds");
-        }
+        validateWithdrawal(account, amount);
         account.withdraw(amount);
     }
 
     private Account findAccount(String accountId) {
         return accountRepository.findById(accountId).orElseThrow();
+    }
+
+    private void validateWithdrawal(Account account, long amount) {
+        if (amount > account.getBalance()) {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
     }
 }
