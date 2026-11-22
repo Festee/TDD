@@ -23,7 +23,7 @@ public class Account {
         return balance;
     }
 
-    public void deposit(long amount) {
-        balance += amount;
+    public void deposit(long depositAmount) {
+        balance += depositAmount;
     }
 }
