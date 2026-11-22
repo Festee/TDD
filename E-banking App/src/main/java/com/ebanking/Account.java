@@ -24,10 +24,19 @@ public class Account {
     }
 
     public void deposit(long depositAmount) {
+        if (depositAmount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive");
+        }
         balance += depositAmount;
     }
 
     public void withdraw(long withdrawalAmount) {
+        if (withdrawalAmount <= 0) {
+            throw new IllegalArgumentException("Withdrawal amount must be positive");
+        }
+        if (withdrawalAmount > balance) {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
         balance -= withdrawalAmount;
     }
 }
