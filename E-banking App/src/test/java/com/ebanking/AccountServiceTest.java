@@ -11,6 +11,18 @@ import static org.mockito.Mockito.when;
 class AccountServiceTest {
 
     @Test
+    void depositsMoneyIntoAccountFoundById() {
+        Account account = new Account("Arta", 100);
+        AccountRepository repository = mock(AccountRepository.class);
+        when(repository.findById("account-1")).thenReturn(Optional.of(account));
+        AccountService service = new AccountService(repository);
+
+        service.deposit("account-1", 25);
+
+        assertEquals(125, account.getBalance());
+    }
+
+    @Test
     void transfersMoneyBetweenAccounts() {
         Account source = new Account("Arta", 100);
         Account destination = new Account("Blerina", 50);
