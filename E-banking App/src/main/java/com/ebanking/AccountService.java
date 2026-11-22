@@ -8,10 +8,14 @@ public class AccountService {
     }
 
     public void transfer(String sourceAccountId, String destinationAccountId, long amount) {
-        Account source = accountRepository.findById(sourceAccountId).orElseThrow();
-        Account destination = accountRepository.findById(destinationAccountId).orElseThrow();
+        Account source = findAccount(sourceAccountId);
+        Account destination = findAccount(destinationAccountId);
 
         source.withdraw(amount);
         destination.deposit(amount);
+    }
+
+    private Account findAccount(String accountId) {
+        return accountRepository.findById(accountId).orElseThrow();
     }
 }
