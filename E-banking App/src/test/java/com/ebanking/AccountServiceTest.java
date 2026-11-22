@@ -1,6 +1,8 @@
 package com.ebanking;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Optional;
 
@@ -32,6 +34,19 @@ class AccountServiceTest {
 
         assertThrows(IllegalArgumentException.class,
                 () -> service.withdraw("account-1", 101));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"99, 1", "100, 0"})
+    void acceptsWithdrawalAtAndBelowAvailableBalance(long amount, long expectedBalance) {
+        Account account = new Account("Arta", 100);
+        AccountRepository repository = mock(AccountRepository.class);
+        when(repository.findById("account-1")).thenReturn(Optional.of(account));
+        AccountService service = new AccountService(repository);
+
+        service.withdraw("account-1", amount);
+
+        assertEquals(expectedBalance, account.getBalance());
     }
 
     @Test
